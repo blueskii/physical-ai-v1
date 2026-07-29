@@ -1,0 +1,16 @@
+[Unit]
+Description=ROS 2 Robot Nodes
+After=network.target
+
+[Service]
+User=blueskii
+Environment="HOME=/home/blueskii"
+ExecStart=/bin/bash -c "\
+    source /opt/ros/jazzy/setup.bash && \
+    source /mnt/d/Work/ai/07-physical-ai/projects/physical-ai-v1/install/setup.bash && \
+    ros2 launch robot robot.launch.py"
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

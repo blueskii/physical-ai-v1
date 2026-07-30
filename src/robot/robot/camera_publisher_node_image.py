@@ -1,5 +1,4 @@
 import os
-import glob
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -11,29 +10,25 @@ class CameraPublisherNode(Node):
     def __init__(self):
         super().__init__('camera_publisher')
 
-        images_dir = os.path.join(os.getcwd(), 'data/images')
-        paths = sorted(glob.glob(os.path.join(images_dir, '*.png')))
+        image_path = os.path.join(os.getcwd(), 'video/image1.png')
+        frame = cv2.imread(image_path)
+        if frame is None:
+            self.get_logger().error(f'이미지 파일을 열 수 없습니다: {image_path}')
+            raise RuntimeError(f'Cannot open image: {image_path}')
 
         self._bridge = CvBridge()
-        self._frames = []
-        for p in paths:
-            frame = cv2.imread(p)
-            if frame is not None:
-                self._frames.append((os.path.basename(p), self._bridge.cv2_to_imgmsg(frame, encoding='bgr8')))
+        self._msg = self._bridge.cv2_to_imgmsg(frame, encoding='bgr8')
 
-        self._index = 0
         self._count = 0
         self._publisher = self.create_publisher(Image, '/camera/image_raw', 10)
         self._timer = self.create_timer(1.0, self._timer_callback)
-        self.get_logger().info(f'Camera Publisher Started. 이미지 {len(self._frames)}장 로드.')
+        self.get_logger().info(f'Camera Publisher Started. 이미지={image_path}')
 
     def _timer_callback(self):
         self._count += 1
-        name, msg = self._frames[self._index]
-        msg.header.stamp = self.get_clock().now().to_msg()
-        self._publisher.publish(msg)
-        self.get_logger().info(f'발행({self._count}): {name}')
-        self._index = (self._index + 1) % len(self._frames)
+        self._msg.header.stamp = self.get_clock().now().to_msg()
+        self._publisher.publish(self._msg)
+        self.get_logger().info(f'발행({self._count}): image1.png')
 
 
 def main(args=None):

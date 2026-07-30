@@ -3,16 +3,16 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 
-class CameraSubscriberNode(Node):
+class TextSubscriberNode(Node):
     def __init__(self):
-        super().__init__('camera_subscriber')
+        super().__init__('text_subscriber')
         self._subscription = self.create_subscription(
             String,
-            '/camera/image_raw',
+            '/topic/text',
             self._callback,
-            10
+            1
         )
-        self.get_logger().info('Camera Subscriber Started.')
+        self.get_logger().info('Text Subscriber Started.')
 
     def _callback(self, msg: String):
         self.get_logger().info(f'수신: {msg.data}')
@@ -20,7 +20,7 @@ class CameraSubscriberNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = CameraSubscriberNode()
+    node = TextSubscriberNode()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
@@ -29,7 +29,3 @@ def main(args=None):
         node.destroy_node()
         if rclpy.ok():
             rclpy.shutdown()
-
-
-if __name__ == '__main__':
-    main()

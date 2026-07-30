@@ -13,16 +13,14 @@ class CameraSubscriberNode(Node):
         self._count = 0
         self._subscription = self.create_subscription(
             Image,
-            '/camera/image_raw',
+            '/topic/camera',
             self._callback,
-            10
+            1
         )
-        self.get_logger().info('Camera Subscriber Started.')
 
     def _callback(self, msg: Image):
         self._count += 1
         self._latest_frame = self._bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-        self.get_logger().info(f'수신({self._count}): image')
 
 
 def main(args=None):
@@ -43,7 +41,3 @@ def main(args=None):
         node.destroy_node()
         if rclpy.ok():
             rclpy.shutdown()
-
-
-if __name__ == '__main__':
-    main()

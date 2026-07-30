@@ -11,7 +11,7 @@ class ImagePublisherNode(Node):
     def __init__(self):
         super().__init__('image_publisher')
 
-        images_dir = os.path.join(os.getcwd(), 'data/images')
+        images_dir = os.path.join(os.getcwd(), 'zdata/images')
         paths = sorted(glob.glob(os.path.join(images_dir, '*.png')))
 
         self._bridge = CvBridge()

@@ -10,4 +10,4 @@ source install/setup.bash
 ros2 run robot $1
 
 # 노드 종료 후 서비스 재시작 (Ctrl+C 등으로 종료되어도 실행됨)
-sudo systemctl start robot.service
+# sudo systemctl start robot.service

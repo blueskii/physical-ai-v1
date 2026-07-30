@@ -24,9 +24,10 @@ setup(
         'console_scripts': [
             # 새 노드 추가 시 여기에 등록
             # - executable = package_name.module_name:main
-            'heartbeat = robot.heartbeat_node:main',
-            'camera = robot.camera_node:main',
+            #'heartbeat = robot.heartbeat_node:main',
+            #'camera = robot.camera_node:main',
             'camera_publisher = robot.camera_publisher_node:main',
+            'camera_subscriber = robot.camera_subscriber_node:main',
         ],
     },
 )

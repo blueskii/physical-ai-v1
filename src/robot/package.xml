@@ -18,6 +18,8 @@ format: package.xml의 형식(스키마) 버전을 지정
   - rclpy: Python으로 ROS2 노드를 만들 수 있게 해주는 라이브러리
   -->
   <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
 
   <export>
     <!-- 이 패키지는 ament_python 빌드 시스템으로 빌드 -->

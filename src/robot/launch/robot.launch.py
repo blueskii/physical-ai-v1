@@ -6,16 +6,30 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
             # 새 노드 추가 시 여기에 등록
+            # Node(
+            #       package='robot',
+            #       executable='heartbeat',
+            #       name='heartbeat_node',
+            #       output='screen',
+            # )
+            # ,
+            # Node(
+            #       package='robot',
+            #       executable='camera',
+            #       name='camera_node',
+            #       output='screen',
+            # )
+            #,
             Node(
                   package='robot',
-                  executable='heartbeat',
-                  name='heartbeat_node',
+                  executable='camera_publisher',
+                  name='camera_publisher_node',
                   output='screen',
             ),
             Node(
                   package='robot',
-                  executable='camera',
-                  name='camera_node',
+                  executable='camera_subscriber',
+                  name='camera_subscriber_node',
                   output='screen',
             ),
     ])

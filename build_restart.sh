@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 서비스 중지
-sudo systemctl stop robot.service
+# sudo systemctl stop robot.service
 
 # ROS2 패키지 빌드
 colcon build

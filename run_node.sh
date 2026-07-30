@@ -6,6 +6,9 @@
 # ROS2 환경 설정
 source install/setup.bash
 
+# 로컬 통신만 사용 (DDS discovery 지연 방지 — ROS2 Jazzy 호환)
+export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
+
 # 개별 노드 실행
 ros2 run robot $1
 

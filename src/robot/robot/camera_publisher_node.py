@@ -4,6 +4,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 import cv2
 
 
@@ -17,7 +18,7 @@ class CameraPublisherNode(Node):
         super().__init__('camera_publisher')
 
         self.declare_parameter('video_path', 'video/lane-seg.mp4')
-        self.declare_parameter('publish_rate', 30.0)  # Hz
+        self.declare_parameter('publish_rate', 0.0)   # Hz (0 = 소스 FPS 자동 감지)
         self.declare_parameter('loop', True)          # EOF 시 처음부터 반복
 
         video_path   = str(self.get_parameter('video_path').value).strip()
@@ -40,9 +41,18 @@ class CameraPublisherNode(Node):
             raise RuntimeError(f'Cannot open video file: {video_path}')
 
         total_frames = int(self._cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        src_fps      = self._cap.get(cv2.CAP_PROP_FPS) or publish_rate
+        src_fps      = self._cap.get(cv2.CAP_PROP_FPS) or 30.0
 
-        self._publisher = self.create_publisher(Image, '/camera/image_raw', 10)
+        # publish_rate=0 이면 소스 FPS 그대로 사용 (영상 속도 왜곡 방지)
+        if publish_rate <= 0:
+            publish_rate = src_fps
+
+        qos = QoSProfile(
+            reliability=QoSReliabilityPolicy.BEST_EFFORT,
+            history=QoSHistoryPolicy.KEEP_LAST,
+            depth=1
+        )
+        self._publisher = self.create_publisher(Image, '/camera/image_raw', qos)
 
         period = 1.0 / publish_rate
         self._timer = self.create_timer(period, self._timer_callback)

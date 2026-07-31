@@ -15,6 +15,7 @@ class HeartbeatNode(Node):
         # 1초마다 호출되어 노드가 살아있음을 로그로 기록
         self.get_logger().info('alive')
 
+# ROS 2 노드 실행을 위한 main 함수 정의
 def main(args=None):
     # ROS Python 클라이언트 라이브러리 초기화
     rclpy.init(args=args)

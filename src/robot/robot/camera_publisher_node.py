@@ -32,7 +32,7 @@ class CameraPublisherNode(Node):
             raise RuntimeError(f'Cannot open camera device {device_id}')
 
         # 카메라 속성 설정 (MJPG 포맷으로 고해상도/고fps 지원)
-        self._cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+        self._cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG')) # 코덱 포맷 설정
         self._cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
         self._cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
         self._cap.set(cv2.CAP_PROP_FPS, fps)
@@ -62,10 +62,11 @@ class CameraPublisherNode(Node):
         # OpenCV 이미지를 ROS 2 Image 메시지로 변환
         msg = self._bridge.cv2_to_imgmsg(frame, encoding='bgr8')
         msg.header.stamp = self.get_clock().now().to_msg()  # 캡처 시각 기록
-        msg.header.frame_id = 'camera'                      # 프레임 ID (좌표계 식별자)
+        msg.header.frame_id = 'camera'                      # 프레임 ID
         self._publisher.publish(msg)                        # 토픽에 발행
         self.get_logger().debug(f'프레임 발행({self._count})')
 
+    # destroy_node() 메서드 오버라이드: 카메라 장치 해제 후 부모 클래스 자원 해제
     def destroy_node(self):
         if self._cap.isOpened():
             self._cap.release()     # 카메라 장치 해제
@@ -74,7 +75,7 @@ class CameraPublisherNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)           # ROS 2 초기화
-    node = CameraPublisherNode()
+    node = CameraPublisherNode()    # 노드 생성
     try:
         rclpy.spin(node)            # 노드 실행 (종료 신호가 올 때까지 대기)
     except KeyboardInterrupt:

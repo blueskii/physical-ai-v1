@@ -32,6 +32,7 @@ def main(args=None):
     finally:
         # Node 종료 후 정리
         node.destroy_node()
+        # ROS 2 런타임이 현재 정상 동작 중인지 확인하고,
         # ROS Client Library 종료 (이미 종료된 경우 중복 호출 방지)
-        if rclpy.ok():
+        if rclpy.ok(): 
             rclpy.shutdown()    

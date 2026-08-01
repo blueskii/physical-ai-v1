@@ -82,5 +82,5 @@ def main(args=None):
         pass                        # Ctrl+C 로 종료 시 정상 처리
     finally:
         node.destroy_node()         # 노드 자원 해제
-        if rclpy.ok():
+        if rclpy.ok():              # ROS 2 런타임이 현재 정상 동작 중인지 확인
             rclpy.shutdown()        # ROS 2 종료

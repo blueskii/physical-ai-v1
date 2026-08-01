@@ -36,6 +36,12 @@ setup(
             'image_subscriber = robot.topic.image_subscriber_node:main',
             'camera_publisher = robot.topic.camera_publisher_node:main',
             'camera_subscriber = robot.topic.camera_subscriber_node:main',
+            'custom_message_type_publisher = robot.topic.custom_message_type_publisher_node:main',
+            'custom_message_type_subscriber = robot.topic.custom_message_type_subscriber_node:main',
+            'led_server = robot.service.led_server_node:main',
+            'led_client = robot.service.led_client_node:main',
+            'led_server_with_custom_type = robot.service.led_server_node_with_custom_type:main',
+            'led_client_with_custom_type = robot.service.led_client_node_with_custom_type:main',
         ],
     },
 )

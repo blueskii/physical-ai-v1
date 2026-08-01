@@ -47,5 +47,23 @@ def generate_launch_description():
                   executable='camera_subscriber',
                   name='camera_subscriber_node',
                   output='screen',
-            ),            
+            ),
+            Node(
+                  package='robot',
+                  executable='custom_message_type_publisher',
+                  name='custom_message_type_publisher_node',
+                  output='screen',
+            ),
+            Node(
+                  package='robot',
+                  executable='led_server',
+                  name='led_server_node',
+                  output='screen',
+            ),
+            Node(
+                  package='robot',
+                  executable='led_server_with_custom_type',
+                  name='led_server_node_with_custom_type',
+                  output='screen',
+            ),
     ])

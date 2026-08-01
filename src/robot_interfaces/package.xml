@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- ROS 2 package.xml 형식 검증 스키마 (format 3 기준) -->
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" 
+            schematypens="http://www.w3.org/2001/XMLSchema"?>
+
+<!-- format="3": package.xml 형식 버전. ROS 2 Jazzy 기준 최신 버전 -->
+<package format="3">
+
+	<!-- 패키지 이름: CMakeLists.txt의 project() 이름과 반드시 일치해야 함 -->
+	<name>robot_interfaces</name>
+
+	<!-- 패키지 버전: 배포 시 사용 (빌드에는 영향 없음) -->
+	<version>0.0.1</version>
+
+	<!-- 패키지 설명: ros2 pkg list 등에서 표시됨 -->
+	<description>Custom ROS 2 service/message interface definitions</description>
+
+	<!-- 패키지 관리자 정보 -->
+	<maintainer email="your@email.com">Your Name</maintainer>
+
+	<!-- 라이선스 -->
+	<license>Apache-2.0</license>
+
+	<!-- buildtool_depend: 빌드 도구 의존성 (빌드 시에만 필요, 런타임에는 불필요) -->
+	<!-- ament_cmake: ROS 2 CMake 빌드 시스템. CMakeLists.txt에서 find_package(ament_cmake)에 대응 -->
+	<buildtool_depend>ament_cmake</buildtool_depend>
+	<!-- rosidl_default_generators: .msg/.srv/.action 파일을 Python/C++ 코드로 변환하는 생성기 -->
+	<buildtool_depend>rosidl_default_generators</buildtool_depend>
+
+	<!-- depend: 빌드 + 런타임 의존성 동시 선언 -->
+	<!-- sensor_msgs: TextImage.msg 안에서 sensor_msgs/Image 타입을 참조하므로 필요 -->
+	<depend>sensor_msgs</depend>
+
+	<!-- exec_depend: 런타임 전용 의존성 (빌드 후 실행 시 필요) -->
+	<!-- rosidl_default_runtime: 생성된 Python/C++ 코드를 런타임에 로드하기 위해 필요 -->
+	<exec_depend>rosidl_default_runtime</exec_depend>
+
+	<!-- member_of_group: 패키지를 특정 그룹에 등록하는 선언 -->
+	<!-- 이 패키지가 인터페이스 정의 패키지임을 ROS 2에 알리기 위해 rosidl_interface_packages 그룹에 등록  -->
+	<member_of_group>rosidl_interface_packages</member_of_group>
+
+    <!-- export: 패키지 빌드/설치 시 추가 정보 제공 -->
+	<export>
+		<!-- 커스텀 인터페이스 패키지는 반드시 ament_cmake 빌드 시스템을 사용해야 함 -->
+		<!-- (ament_python은 .msg/.srv 생성을 지원하지 않음) -->
+		<build_type>ament_cmake</build_type>
+	</export>
+</package>

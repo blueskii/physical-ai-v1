@@ -41,13 +41,13 @@ class ImagePublisherNode(Node):
 
 
 def main(args=None):
-    rclpy.init(args=args)          # ROS 2 초기화
+    rclpy.init(args=args)           # ROS 2 초기화
     node = ImagePublisherNode()
     try:
-        rclpy.spin(node)           # 노드 실행 (종료 신호가 올 때까지 대기)
+        rclpy.spin(node)            # 노드 실행 (종료 신호가 올 때까지 대기)
     except KeyboardInterrupt:
-        pass                       # Ctrl+C 로 종료 시 정상 처리
+        pass                        # Ctrl+C 로 종료 시 정상 처리
     finally:
-        node.destroy_node()        # 노드 자원 해제
-        if rclpy.ok():
-            rclpy.shutdown()       # ROS 2 종료
+        node.destroy_node()         # 노드 자원 해제
+        if rclpy.ok():              # ROS 2 런타임이 현재 정상 동작 중인지 확인
+            rclpy.shutdown()        # ROS 2 종료

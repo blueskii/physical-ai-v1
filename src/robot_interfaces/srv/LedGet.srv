@@ -1,0 +1,6 @@
+# Request: LED 상태 조회 요청 (파라미터 없음)
+---
+# Response: 현재 LED 상태
+bool success      # 처리 성공 여부
+bool state        # 현재 LED 켜짐 여부 (true=ON, false=OFF)
+uint8 brightness  # 현재 LED 밝기 (0-255)

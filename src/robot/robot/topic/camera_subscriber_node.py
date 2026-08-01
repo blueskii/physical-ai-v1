@@ -42,5 +42,5 @@ def main(args=None):
     finally:
         cv2.destroyAllWindows()     # 모든 OpenCV 창 닫기
         node.destroy_node()         # 노드 자원 해제
-        if rclpy.ok():
+        if rclpy.ok():              # ROS 2 런타임이 현재 정상 동작 중인지 확인 
             rclpy.shutdown()        # ROS 2 종료

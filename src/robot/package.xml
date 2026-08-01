@@ -20,6 +20,7 @@ format: package.xml의 형식(스키마) 버전을 지정
   <exec_depend>rclpy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>robot_interfaces</exec_depend>  <!-- 커스텀 서비스 타입 패키지 -->
 
   <export>
     <!-- 이 패키지는 ament_python 빌드 시스템으로 빌드 -->

@@ -1,0 +1,8 @@
+# Request: LED 제어 요청
+bool state        # LED 켜기/끄기 (true=ON, false=OFF)
+uint8 brightness  # LED 밝기 (0=최소, 255=최대, state=false이면 무시)
+---
+# Response: 처리 결과
+bool success      # 처리 성공 여부
+bool state        # 현재 LED 켜짐 여부 (true=ON, false=OFF)
+uint8 brightness  # 현재 LED 밝기 (0-255)

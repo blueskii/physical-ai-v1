@@ -6,10 +6,10 @@ import cv2                                        # 이미지 처리
 import numpy as np                                # 배열 생성 (이미지 초기화)
 
 
-class CustomMessageTypePublisherNode(Node):
+class CustomMessagePublisherNode(Node):
     def __init__(self):
         # Node 초기화 및 노드 이름 등록
-        super().__init__('custom_message_type_publisher_node')
+        super().__init__('custom_message_publisher_node')
 
         # OpenCV ↔ ROS 2 메시지 변환 객체
         self._bridge = CvBridge()
@@ -58,7 +58,7 @@ class CustomMessageTypePublisherNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)                   # ROS 2 초기화
-    node = CustomMessageTypePublisherNode() # 노드 생성
+    node = CustomMessagePublisherNode() # 노드 생성
     try:
         rclpy.spin(node)                    # 노드 실행 (종료 신호가 올 때까지 대기)
     except KeyboardInterrupt:

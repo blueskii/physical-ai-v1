@@ -42,6 +42,9 @@ setup(
             'led_client = robot.service.led_client_node:main',
             'led_server_with_custom_type = robot.service.led_server_node_with_custom_type:main',
             'led_client_with_custom_type = robot.service.led_client_node_with_custom_type:main',
+            'move_server = robot.action.move_server_node:main',
+            'move_client = robot.action.move_client_node:main',
+            'param = robot.parameter.param_node:main',
         ],
     },
 )

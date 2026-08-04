@@ -1,7 +1,7 @@
-import rclpy                              # ROS 2 Python 클라이언트 라이브러리
-from rclpy.node import Node               # ROS 2 노드 기본 클래스
-from std_srvs.srv import SetBool          # LED ON/OFF 제어 서비스 타입 (request: bool, response: bool + string)
-from std_srvs.srv import Trigger          # LED 상태 조회 서비스 타입 (request: 없음, response: bool + string)
+import rclpy                        # ROS 2 Python 클라이언트 라이브러리
+from rclpy.node import Node         # ROS 2 노드 기본 클래스
+from std_srvs.srv import SetBool    # LED ON/OFF 제어 서비스 타입 (request: bool, response: bool + string)
+from std_srvs.srv import Trigger    # LED 상태 조회 서비스 타입 (request: 없음, response: bool + string)
 
 # LED 제어 서비스 서버 노드
 class LedServerNode(Node):
@@ -52,7 +52,7 @@ class LedServerNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)           # ROS 2 초기화
-    node = LedServerNode()
+    node = LedServerNode()          # LED 서비스 서버 노드 생성
     try:
         rclpy.spin(node)            # 노드 실행 (종료 신호가 올 때까지 대기)
     except KeyboardInterrupt:

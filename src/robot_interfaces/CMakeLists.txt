@@ -18,9 +18,10 @@ find_package(sensor_msgs REQUIRED)
 # - 여기에 등록된 .srv 파일이 Python 클래스(robot_interfaces.srv.LedSet 등)로 자동 변환됨
 # - 새 인터페이스 추가 시 이 목록에 경로를 추가하면 됨
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/TextImage.msg" # 텍스트 + 이미지 복합 메시지
-  "srv/LedSet.srv"    # LED 제어 서비스 (state + brightness → success + message)
-  "srv/LedGet.srv"    # LED 상태 조회 서비스 (없음 → state + brightness + message)
+  "msg/TextImage.msg" # 텍스트 + 이미지 복합 데이터를 위한 Topic 메시지를 정의한 인터페이스
+  "srv/LedSet.srv"      # LED 상태 변경을 위한 서비스 타입을 정의한 인터페이스 
+  "srv/LedGet.srv"      # LED 상태 조회를 위한 서비스 타입을 정의한 인터페이스
+  "action/Move.action"  # 이동 목표 거리를 위한 액션 타입을 정의한 인터페이스
   DEPENDENCIES sensor_msgs  # TextImage.msg에서 sensor_msgs/Image 참조
 )
 

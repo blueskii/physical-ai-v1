@@ -1,0 +1,15 @@
+# ROS 2 파라미터 설정 파일
+# - 노드 이름을 키로, 그 아래 ros__parameters 에 파라미터를 정의
+# - launch 파일에서 parameters=[config] 로 전달하면 노드 시작 시 자동으로 적용됨
+
+param_node:
+  ros__parameters:
+    robot_name: "MyRobot"   # 로봇 이름
+    timer_period: 1.0       # 타이머 주기 (초)
+    max_speed: 1.5          # 최대 속도 (m/s)
+    debug_mode: false       # 디버그 모드
+
+# camera_node:
+#   ros__parameters:
+#     width: 640
+#     height: 480

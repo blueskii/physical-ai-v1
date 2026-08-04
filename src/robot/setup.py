@@ -16,6 +16,8 @@ setup(
         ('share/' + package_name, ['package.xml']),
         # launch 폴더의 모든 .py 파일을 share에 설치 (ros2 launch 명령으로 접근 가능)
         (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
+        # config 폴더의 모든 .yaml 파일을 share에 설치 (파라미터 설정 파일)
+        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],    # 빌드에 필요한 의존 패키지
     zip_safe=True,                      # zip 압축 배포 허용 여부

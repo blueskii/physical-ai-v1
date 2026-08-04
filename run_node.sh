@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# 개별 노드 실행을 위해 서비스 중지
-# sudo systemctl stop robot.service
-
 # ROS2 환경 설정
 source install/setup.bash
 
-# 개별 노드 실행
-ros2 run robot $1
-
-# 노드 종료 후 서비스 재시작
-# sudo systemctl start robot.service
+# 실행 매개값이 없으면 launch 파일 실행, 
+# 있으면 ros2 run 명령으로 개별 노드 실행
+if [[ -z "$1" ]]; then
+    ros2 launch robot robot.launch.py
+else
+    ros2 run robot $1
+fi

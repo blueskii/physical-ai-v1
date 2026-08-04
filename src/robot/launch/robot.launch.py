@@ -1,9 +1,14 @@
 from launch import LaunchDescription      # 실행할 노드 목록을 담는 컨테이너
 from launch_ros.actions import Node       # 개별 노드 실행 설정
+from ament_index_python.packages import get_package_share_directory  # 설치된 패키지 경로 조회
+import os
 
 # ROS 2 시스템이 한번에 실행할 노드들을 LaunchDescription에 포장해서 리턴하는 함수
 # - ros2 launch robot robot.launch.py 명령으로 호출
 def generate_launch_description():
+	# 빌드 후 install/robot/share/robot/config/params.yaml 파일 경로를 가져옴
+	config = os.path.join(get_package_share_directory('robot'), 'config', 'params.yaml')
+
 	return LaunchDescription([
 		# 새 노드 추가 시 여기에 등록
 		# Node(
@@ -102,4 +107,11 @@ def generate_launch_description():
 		# 	name='param_node',
 		# 	output='screen',
 		# ),
+                Node(
+                        package='robot',
+                        executable='param',
+                        name='param_node',
+                        output='screen',
+                        parameters=[config],  # YAML 파일에서 파라미터를 읽어 노드에 전달
+                ),
 	])
